@@ -17,24 +17,35 @@ public class hw01 {
         System.out.println("task_3: " + Arrays.toString(task3(arrInt_1, arrInt_bad)));
     }
 
-//    Реализуйте 3 метода, чтобы в каждом из них получить разные исключения
-//    Посмотрите на код, и подумайте сколько разных типов исключений вы тут сможете получить?
-
 
 
 
 
     public static int sum2d(String[][] arr) {
+        //    Реализуйте 3 метода, чтобы в каждом из них получить разные исключения
+        //    Посмотрите на код, и подумайте сколько разных типов исключений вы тут сможете получить?
         int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < 5; j++) {
-                int val = Integer.parseInt(arr[i][j]);
-                sum += val;
+        try {
+            for (int i = 0; i < arr.length; i++) {
+                for (int j = 0; j < 5; j++) {
+                    int val = Integer.parseInt(arr[i][j]);
+                    sum += val;
+                }
             }
-        }
-        return sum;
-    }
+            System.out.println("Сумма элементов массива: " + sum);
+            return sum;
 
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ERROR: Обращение вне массива");
+        } catch (NumberFormatException e) {
+            System.out.println("ERROR: Не верные входные данные");
+        } catch (NullPointerException e) {
+            System.out.println("ERROR: Входящий массив является null");
+        } catch (Exception e){
+            System.out.println("Ой, произошла не предвиденная ошибка");
+        }
+        return -1;
+    }
 
     public static int[] task2(int[] arr1, int[] arr2) {
         //    Реализуйте метод, принимающий в качестве аргументов два целочисленных массива,
