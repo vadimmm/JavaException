@@ -22,6 +22,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="seminar" />
@@ -125,7 +131,8 @@
       <updated>1681749603526</updated>
       <workItem from="1681749604290" duration="8000" />
       <workItem from="1682397308788" duration="3029000" />
-      <workItem from="1682783794442" duration="20972000" />
+      <workItem from="1682783794442" duration="21158000" />
+      <workItem from="1682955377878" duration="39000" />
     </task>
     <task id="LOCAL-00001" summary="fix sem 03">
       <created>1682357643161</created>
@@ -141,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682948983324</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="hw03 final">
+      <created>1682955027619</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682955027619</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,7 +164,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix sem 03" />
     <MESSAGE value="hw03 logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="hw03 logic" />
+    <MESSAGE value="hw03 final" />
+    <option name="LAST_COMMIT_MESSAGE" value="hw03 final" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
