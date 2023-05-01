@@ -1,8 +1,13 @@
 package org.example;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.zip.DataFormatException;
 
 public class hw03 {
 
@@ -33,43 +38,49 @@ public class hw03 {
 //    При возникновении проблемы с чтением-записью в файл, исключение должно быть корректно обработано,
 //    пользователь должен увидеть стектрейс ошибки.
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DataFormatException {
+        inputData();
+    }
+
+
+
+    public static void inputData() throws DataFormatException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите Фамилию Имя Отчество датарождения номертелефона пол через пробел:");
         String input = scanner.nextLine();
         String[] data = input.split(" ");
         if (data.length > 6) {
-            System.out.println("Вы ввели слишком много данных");
-            return;
+            throw new RuntimeException("Вы ввели слишком много данных");
         }
         String surname = data[0];
-        for(int i = 0; i < surname.length(); i++) {
-            if(Character.isDigit(surname.charAt(i))) {
-                System.out.println("Фамилия должна содержать только буквы");
-                return;
-            }
+        if (!checkString(surname)){
+            throw new RuntimeException("ОШИБКА: передано '" + surname + "', но фамилия должна содержать только буквы");
         }
         String name = data[1];
-
+        if (!checkString(name)){
+            throw new RuntimeException("ОШИБКА: передано '" + name + "', но имя должно содержать только буквы");
+        }
         String patronymic = data[2];
+        if (!checkString(patronymic)){
+            throw new RuntimeException("ОШИБКА: передано '" + patronymic + "', но отчество должно содержать только буквы");
+        }
         String dateOfBirth = data[3];
+        if (!checkDateFormat("dd.MM.yyyy", dateOfBirth)){
+            throw new DataFormatException("ОШИБКА: передано '" + dateOfBirth + "', но дата должна быть в правильном формате - DD.MM.YYYY");
+        }
         String phoneNumber = data[4];
-        for(int i = 0; i < phoneNumber.length(); i++) {
-            if(!Character.isDigit(phoneNumber.charAt(i))) {
-                System.out.println("Номер телефона должен содержать только цифры");
-                return;
-            }
+        if (!checkNumb(phoneNumber)){
+            throw new RuntimeException("ОШИБКА: передано '" + phoneNumber + "', но номер телефона должен содержать только цифры!");
         }
         String gender = data[5];
-        if (!gender.equals("m") && !gender.equals("f")) {
-            System.out.println("Неверный формат пола");
-            return;
+        if (checkGender(gender)){
+            throw new RuntimeException("ОШИБКА: передано '" + gender + "', но не верное определение гендера");
         }
+
         String sepSymbol = ";";
         try {
             FileWriter writer = new FileWriter(surname + ".csv");
-            writer.write(surname + sepSymbol +
-                             name + sepSymbol +
+            writer.write(surname + sepSymbol + name + sepSymbol +
                              patronymic + sepSymbol +
                              dateOfBirth + sepSymbol +
                              phoneNumber + sepSymbol +
@@ -81,31 +92,43 @@ public class hw03 {
         }
     }
 
-    static boolean checkString(String value, String msg) {
-        boolean check = true;
-        for (int i = 0; i < value.length() && check; i++) {
-            if (!Character.isDigit(value.charAt(i))) {
-                System.out.println(msg);
+    public static boolean checkString(String value) {
+        for (int i = 0; i < value.length(); i++) {
+            if (!Character.isLetter(value.charAt(i))) {
                 return false;
             }
         }
         return true;
+    }
+    public static boolean checkDateFormat(String format, String dateInput){
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(dateInput);
+            return true;
+        } catch (ParseException e) {
+            return false;
         }
+    }
 
-            static void checkNumb (String value, String msg){
-                check = true;
-                for (int i = 0; i < value.length() && check; i++) {
-                    if (!Character.isDigit(value.charAt(i))) {
-                        System.out.println(msg);
-                        return;
-                    }
-                }
-            }
-
-            static void checkGender (String value, String msg){
-                if (!value.equals("m") && !value.equals("f")) {
-                    System.out.println(msg);
-                    return;
-                }
+    public static boolean checkNumb (String value){
+        boolean check = true;
+        for (int i = 0; i < value.length() && check; i++) {
+            if (!Character.isDigit(value.charAt(i))) {
+                return false;
             }
         }
+        return true;
+    }
+
+
+
+
+    static boolean checkGender (String value){
+        boolean check = true;
+        if ((!value.equals("m") && !value.equals("f") && !value.equals("м") && !value.equals("ж")) && check) {
+            return true;
+        }
+        return false;
+    }
+}
