@@ -7,7 +7,6 @@
     <list default="true" id="7ca68ef7-2df6-442e-8ff6-b43f3b4461fb" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/src/main/java/org/example/ManualExCheckDateFormat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/hw03.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/hw03.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +125,7 @@
       <updated>1681749603526</updated>
       <workItem from="1681749604290" duration="8000" />
       <workItem from="1682397308788" duration="3029000" />
-      <workItem from="1682783794442" duration="14911000" />
+      <workItem from="1682783794442" duration="20972000" />
     </task>
     <task id="LOCAL-00001" summary="fix sem 03">
       <created>1682357643161</created>
@@ -135,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682357643161</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="hw03 logic">
+      <created>1682948983324</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682948983324</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,7 +149,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix sem 03" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix sem 03" />
+    <MESSAGE value="hw03 logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="hw03 logic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,11 +1,17 @@
 package org.example;
 
+import java.io.FileWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.zip.DataFormatException;
 
@@ -38,13 +44,13 @@ public class hw03 {
 //    При возникновении проблемы с чтением-записью в файл, исключение должно быть корректно обработано,
 //    пользователь должен увидеть стектрейс ошибки.
 
-    public static void main(String[] args) throws DataFormatException {
+    public static void main(String[] args) throws IOException, DataFormatException {
         inputData();
     }
 
 
 
-    public static void inputData() throws DataFormatException {
+    public static void inputData() throws DataFormatException, IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите Фамилию Имя Отчество датарождения номертелефона пол через пробел:");
         String input = scanner.nextLine();
@@ -77,21 +83,17 @@ public class hw03 {
             throw new RuntimeException("ОШИБКА: передано '" + gender + "', но не верное определение гендера");
         }
 
-        String sepSymbol = ";";
+        String fileName = surname + ".csv";
+        String content = String.join(" ", data);
+        FileWriter writer = new FileWriter(fileName, true);
         try {
-            FileWriter writer = new FileWriter(surname + ".csv");
-            writer.write(surname + sepSymbol + name + sepSymbol +
-                             patronymic + sepSymbol +
-                             dateOfBirth + sepSymbol +
-                             phoneNumber + sepSymbol +
-                             gender);
+            writer.write(content);
             writer.close();
             System.out.println("Данные успешно записаны в файл " + surname + ".csv");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     public static boolean checkString(String value) {
         for (int i = 0; i < value.length(); i++) {
             if (!Character.isLetter(value.charAt(i))) {
@@ -101,16 +103,14 @@ public class hw03 {
         return true;
     }
     public static boolean checkDateFormat(String format, String dateInput){
-        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
-        dateFormat.setLenient(false);
         try {
-            dateFormat.parse(dateInput);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+            LocalDate.parse(dateInput, formatter);
             return true;
-        } catch (ParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
     }
-
     public static boolean checkNumb (String value){
         boolean check = true;
         for (int i = 0; i < value.length() && check; i++) {
@@ -120,10 +120,6 @@ public class hw03 {
         }
         return true;
     }
-
-
-
-
     static boolean checkGender (String value){
         boolean check = true;
         if ((!value.equals("m") && !value.equals("f") && !value.equals("м") && !value.equals("ж")) && check) {
